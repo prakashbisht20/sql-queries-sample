@@ -143,6 +143,7 @@ insert into Products values(10, 'Sony', 'TV')
 insert into Products values(11, 'Sony', 'Camera')
 
 -------------------------------------------------------------------------
+
 select * from Products
 
 -------------------------------------------------------------------------
