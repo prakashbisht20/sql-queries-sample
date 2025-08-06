@@ -1,4 +1,4 @@
-### **************Important SQL Queries******************
+### :star: Important SQL Queries
 
 1. Count of Employee in each Department.
 2. Nth Largest Salary of Employee.
