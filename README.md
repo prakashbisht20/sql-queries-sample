@@ -12,11 +12,16 @@
 
 ### 1. Count of Employee in each Department.
 
+```sql
+
 create table Employee(EmpId int primary key, EmpName varchar(50), DeptId int, Salary numeric(18,2), Manager int);
 
 create table Department(DeptId int primary key, DeptName varchar(50))
 
+```
 -------------------------------------------------------------------------
+
+```sql
 
 insert into Employee values (3, 'Anjali', 2, 45000, 5);
 insert into Employee values (4, 'Ram', 3, 30000, 1);
@@ -27,17 +32,27 @@ insert into Employee values (8, 'Sanjay', 1, 32000, 1);
 insert into Employee values (9, 'Kunal', 2, 40000, 3);
 insert into Employee values (10, 'Raju', 3, 37000, 7);
 
+```
 -------------------------------------------------------------------------
+
+```sql
 select * from Employee
+```
+-------------------------------------------------------------------------
+
+```sql
 
 select d.DeptName as DeptName, EmpCount
 from(
 select DeptId, count(*) EmpCount from Employee group by DeptId
 ) emp join Department d on emp.DeptId=d.DeptId
 
+```
 -------------------------------------------------------------------------
 
 ### 2. Nth Largest Salary of Employee.
+
+```sql
 
 ;WITH cte AS
 (
@@ -47,9 +62,12 @@ select top (1) cte.EmpId, cte.EmpName, cte.Salary, d.DeptName from CTE inner joi
 on cte.DeptId=d.DeptId 
 WHERE RowNumber=5
 
+```
 -------------------------------------------------------------------------
 
 ### 3. Highest Salary in each Department.
+
+```sql
 
 ;WITH cte AS
 (
@@ -59,16 +77,22 @@ select cte.EmpId, cte.EmpName, cte.Salary, d.DeptName from CTE inner join Depart
 on cte.DeptId=d.DeptId 
 WHERE RowNumber=1
 
+```
 -------------------------------------------------------------------------
 
 ### 4. Organization Hierarchy.
 
+```sql
+
 select e.EmpId, e.EmpName, m.EmpName as Manager from Employee e
 inner join Employee m on e.Manager=m.EmpId 
 
+```
 -------------------------------------------------------------------------
 
 ### 5. Deleting Duplicate Records from a Table.
+
+```sql
 
 CREATE TABLE Person (Pid INT, Pname VARCHAR(50))
 
@@ -95,6 +119,7 @@ select * from Person;
 )
 delete from cte where RowNumber>1
 
+```
 -------------------------------------------------------------------------
 
 ### 6. Convert Rows into Coloumns by using Pivot.
