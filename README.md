@@ -1,5 +1,4 @@
- ### **************Important SQL Queries******************
-
+### **************Important SQL Queries******************
 
 1. Count of Employee in each Department.
 2. Nth Largest Salary of Employee.
@@ -9,13 +8,15 @@
 6. Convert Rows into Coloumns by using Pivot.
 7. Pagination in SQL.
 
- ### ****************************************************
+### ****************************************************
 
 ### 1. Count of Employee in each Department.
 
 create table Employee(EmpId int primary key, EmpName varchar(50), DeptId int, Salary numeric(18,2), Manager int);
 
 create table Department(DeptId int primary key, DeptName varchar(50))
+
+-------------------------------------------------------------------------
 
 insert into Employee values (3, 'Anjali', 2, 45000, 5);
 insert into Employee values (4, 'Ram', 3, 30000, 1);
@@ -26,12 +27,15 @@ insert into Employee values (8, 'Sanjay', 1, 32000, 1);
 insert into Employee values (9, 'Kunal', 2, 40000, 3);
 insert into Employee values (10, 'Raju', 3, 37000, 7);
 
+-------------------------------------------------------------------------
 select * from Employee
 
 select d.DeptName as DeptName, EmpCount
 from(
 select DeptId, count(*) EmpCount from Employee group by DeptId
 ) emp join Department d on emp.DeptId=d.DeptId
+
+-------------------------------------------------------------------------
 
 ### 2. Nth Largest Salary of Employee.
 
@@ -43,6 +47,8 @@ select top (1) cte.EmpId, cte.EmpName, cte.Salary, d.DeptName from CTE inner joi
 on cte.DeptId=d.DeptId 
 WHERE RowNumber=5
 
+-------------------------------------------------------------------------
+
 ### 3. Highest Salary in each Department.
 
 ;WITH cte AS
@@ -53,14 +59,20 @@ select cte.EmpId, cte.EmpName, cte.Salary, d.DeptName from CTE inner join Depart
 on cte.DeptId=d.DeptId 
 WHERE RowNumber=1
 
+-------------------------------------------------------------------------
+
 ### 4. Organization Hierarchy.
 
 select e.EmpId, e.EmpName, m.EmpName as Manager from Employee e
 inner join Employee m on e.Manager=m.EmpId 
 
+-------------------------------------------------------------------------
+
 ### 5. Deleting Duplicate Records from a Table.
 
 CREATE TABLE Person (Pid INT, Pname VARCHAR(50))
+
+-------------------------------------------------------------------------
 
 insert into Person values (1,'Amit')
 insert into Person values (2,'Rohit')
@@ -71,7 +83,11 @@ insert into Person values (2,'Rohit')
 insert into Person values (1,'Amit')
 insert into Person values (2,'Rohit')
 
+-------------------------------------------------------------------------
+
 select * from Person;
+
+-------------------------------------------------------------------------
 
 ;with cte as
 (
@@ -79,9 +95,13 @@ select * from Person;
 )
 delete from cte where RowNumber>1
 
+-------------------------------------------------------------------------
+
 ### 6. Convert Rows into Coloumns by using Pivot.
 
 create table Products (id int, name varchar(50), devicetype varchar(50))
+
+-------------------------------------------------------------------------
 
 insert into Products values(1, 'Apple', 'TV')
 insert into Products values(2, 'Apple', 'Tablet')
@@ -95,8 +115,10 @@ insert into Products values(9, 'LG', 'SmartPhone')
 insert into Products values(10, 'Sony', 'TV')
 insert into Products values(11, 'Sony', 'Camera')
 
+-------------------------------------------------------------------------
 select * from Products
 
+-------------------------------------------------------------------------
 select Name, DeviceType1, DeviceType2, DeviceType3 from
 (
  select Name, DeviceType, 'DeviceType'+Cast(row_number() over (partition by name order by name) as varchar(50)) as DeviceNumber from Products
@@ -107,11 +129,13 @@ max(DeviceType)
 for DeviceNumber in (DeviceType1, DeviceType2, DeviceType3)
 ) pvt
 
+-------------------------------------------------------------------------
 
 ### 7. Pagination in SQL Stored Procedure.
 
 select * from Employee
 
+-------------------------------------------------------------------------
 --exec GetEmployeeData 2, 5
 
 CREATE PROCEDURE GetEmployeeData
@@ -147,3 +171,5 @@ BEGIN
     SELECT COUNT(*) AS TotalRecords FROM Employee;
 
 END;
+
+-------------------------------------------------------------------------
