@@ -1,4 +1,4 @@
-#**************Important SQL Queries******************
+ ### **************Important SQL Queries******************
 
 
 1. Count of Employee in each Department.
@@ -9,9 +9,9 @@
 6. Convert Rows into Coloumns by using Pivot.
 7. Pagination in SQL.
 
-#****************************************************
+ ### ****************************************************
 
-#1. Count of Employee in each Department.
+### 1. Count of Employee in each Department.
 
 create table Employee(EmpId int primary key, EmpName varchar(50), DeptId int, Salary numeric(18,2), Manager int);
 
@@ -33,7 +33,7 @@ from(
 select DeptId, count(*) EmpCount from Employee group by DeptId
 ) emp join Department d on emp.DeptId=d.DeptId
 
-#2. Nth Largest Salary of Employee.
+### 2. Nth Largest Salary of Employee.
 
 ;WITH cte AS
 (
@@ -43,7 +43,7 @@ select top (1) cte.EmpId, cte.EmpName, cte.Salary, d.DeptName from CTE inner joi
 on cte.DeptId=d.DeptId 
 WHERE RowNumber=5
 
-#3. Highest Salary in each Department.
+### 3. Highest Salary in each Department.
 
 ;WITH cte AS
 (
@@ -53,12 +53,12 @@ select cte.EmpId, cte.EmpName, cte.Salary, d.DeptName from CTE inner join Depart
 on cte.DeptId=d.DeptId 
 WHERE RowNumber=1
 
-#4. Organization Hierarchy.
+### 4. Organization Hierarchy.
 
 select e.EmpId, e.EmpName, m.EmpName as Manager from Employee e
 inner join Employee m on e.Manager=m.EmpId 
 
-#5. Deleting Duplicate Records from a Table.
+### 5. Deleting Duplicate Records from a Table.
 
 CREATE TABLE Person (Pid INT, Pname VARCHAR(50))
 
@@ -79,7 +79,7 @@ select * from Person;
 )
 delete from cte where RowNumber>1
 
-#6. Convert Rows into Coloumns by using Pivot.
+### 6. Convert Rows into Coloumns by using Pivot.
 
 create table Products (id int, name varchar(50), devicetype varchar(50))
 
@@ -108,7 +108,7 @@ for DeviceNumber in (DeviceType1, DeviceType2, DeviceType3)
 ) pvt
 
 
-#7. Pagination in SQL Stored Procedure.
+### 7. Pagination in SQL Stored Procedure.
 
 select * from Employee
 
