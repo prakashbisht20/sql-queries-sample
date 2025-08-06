@@ -124,6 +124,8 @@ delete from cte where RowNumber>1
 
 ### 6. Convert Rows into Coloumns by using Pivot.
 
+```sql
+
 create table Products (id int, name varchar(50), devicetype varchar(50))
 
 -------------------------------------------------------------------------
@@ -154,13 +156,16 @@ max(DeviceType)
 for DeviceNumber in (DeviceType1, DeviceType2, DeviceType3)
 ) pvt
 
+```
 -------------------------------------------------------------------------
 
 ### 7. Pagination in SQL Stored Procedure.
 
+```sql
 select * from Employee
 
 -------------------------------------------------------------------------
+
 --exec GetEmployeeData 2, 5
 
 CREATE PROCEDURE GetEmployeeData
@@ -197,4 +202,5 @@ BEGIN
 
 END;
 
+```
 -------------------------------------------------------------------------
